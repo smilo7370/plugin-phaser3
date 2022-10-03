@@ -52,17 +52,28 @@ class Level extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
-		this.text.setInteractive().on('pointerdown', () => {
-			this.input.keyboard.on('keydown-A', function (event) {
-				comments = comments.concat('a');
+		const keys = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE','ZERO','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','NUMPAD_ZERO','NUMPAD_ONE','NUMPAD_TWO','NUMPAD_THREE','NUMPAD_FOUR','NUMPAD_FIVE','NUMPAD_SIX','NUMPAD_SEVEN','NUMPAD_NINE'];
+
+		for(var i = 0; i <= keys.length ; i++) {
+			this.input.keyboard.on('keydown-'+keys[i], function (event) {
+				comments = comments.concat(event.key);
 				console.log(comments);
 			});
+		}
+
+
+		this.input.keyboard.on('keydown-'+'BACKSPACE', function (event) {
+			comments = comments.slice(0, -1);
+			console.log(comments);
 		});
 	}
 
 	update() {
 		if(comments != "") {
 			this.text.setText(comments);
+		}
+		if(comments == "") {
+			this.text.setText('Enter Your Comments');
 		}
 	}
 
