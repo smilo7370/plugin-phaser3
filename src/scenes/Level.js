@@ -22,10 +22,28 @@ class Level extends Phaser.Scene {
 		ninepatch_1.marginRight = 50;
 		ninepatch_1.marginBottom = 50;
 
-		const text = this.add.text(740, 585, 'Enter Your Comments', { fixedWidth: 750, fixedHeight: 360 });
-		text.setOrigin(0);
+		const text_line_1 = this.add.text(740, 585, '', { fixedWidth: 720, fixedHeight: 360 });
+		text_line_1.setOrigin(0);
+		const text_line_2 = this.add.text(740, 610, '', { fixedWidth: 720, fixedHeight: 360 });
+		text_line_2.setOrigin(0);
+		const text_line_3 = this.add.text(740, 635, '', { fixedWidth: 720, fixedHeight: 360 });
+		text_line_3.setOrigin(0);
+		const text_line_4 = this.add.text(740, 660, '', { fixedWidth: 720, fixedHeight: 360 });
+		text_line_4.setOrigin(0);
+		const text_line_5 = this.add.text(740, 685, '', { fixedWidth: 720, fixedHeight: 360 });
+		text_line_5.setOrigin(0);
+		const text_line_6 = this.add.text(740, 710, '', { fixedWidth: 720, fixedHeight: 360 });
+		text_line_6.setOrigin(0);
+		const text_line_7 = this.add.text(740, 735, '', { fixedWidth: 720, fixedHeight: 360 });
+		text_line_7.setOrigin(0);
 
-		this.text = text;
+		this.text_line_1 = text_line_1;
+		this.text_line_2 = text_line_2;
+		this.text_line_3 = text_line_3;
+		this.text_line_4 = text_line_4;
+		this.text_line_5 = text_line_5;
+		this.text_line_6 = text_line_6;
+		this.text_line_7 = text_line_7;
 
 		this.ninepatch_1 = ninepatch_1;
 
@@ -34,8 +52,13 @@ class Level extends Phaser.Scene {
 
 	/** @type {NinePatch} */
 	ninepatch_1;
-	text;
-
+	text_line_1;
+	text_line_2;
+	text_line_3;
+	text_line_4;
+	text_line_5;
+	text_line_6;
+	text_line_7;
 	/* START-USER-CODE */
 
 	// Write more your code here
@@ -56,27 +79,77 @@ class Level extends Phaser.Scene {
 
 		for(var i = 0; i <= keys.length ; i++) {
 			this.input.keyboard.on('keydown-'+keys[i], function (event) {
-				comments = comments.concat(event.key);
-				console.log(comments);
+				// if(comments.length != 450) {
+					comments = comments.concat(event.key);
+					console.log(comments);
+				// }
 			});
 		}
 
-
 		this.input.keyboard.on('keydown-'+'BACKSPACE', function (event) {
-			comments = comments.slice(0, -1);
-			console.log(comments);
+			this.scene.erase();
 		});
+	}
+
+	erase() {
+		if(this.text_line_7.text != '') {
+			this.text_line_7.text = this.text_line_7.text.slice(0, -1);
+			comments = comments.slice(0,-1);
+		}
+		else if(this.text_line_6.text != '') {
+			this.text_line_6.text = this.text_line_6.text.slice(0, -1);
+			comments = comments.slice(0,-1);
+		}
+		else if(this.text_line_5.text != '') {
+			this.text_line_5.text = this.text_line_5.text.slice(0, -1);
+			comments = comments.slice(0,-1);
+		}
+		else if(this.text_line_4.text != '') {
+			this.text_line_4.text = this.text_line_4.text.slice(0, -1);
+			comments = comments.slice(0,-1);
+		}
+		else if(this.text_line_3.text != '') {
+			this.text_line_3.text = this.text_line_3.text.slice(0, -1);
+			comments = comments.slice(0,-1);
+		}
+		else if(this.text_line_2.text != '') {
+			this.text_line_2.text = this.text_line_2.text.slice(0, -1);
+			comments = comments.slice(0,-1);
+		}
+		else if(this.text_line_1.text != '') {
+			this.text_line_1.text = this.text_line_1.text.slice(0, -1);
+			comments = comments.slice(0,-1);
+		}
 	}
 
 	update() {
 		if(comments != "") {
-			this.text.setText(comments);
+			if(this.text_line_1.text.length <= 75) {
+				this.text_line_1.setText(comments);
+			}
+			else if(this.text_line_2.text.length <= 75) {
+				this.text_line_2.setText(comments.slice(75));
+			}
+			else if(this.text_line_3.text.length <= 75) {
+				this.text_line_3.setText(comments.slice(150));
+			}
+			else if(this.text_line_4.text.length <= 75) {
+				this.text_line_4.setText(comments.slice(225));
+			}
+			else if(this.text_line_5.text.length <= 75) {
+				this.text_line_5.setText(comments.slice(300));
+			}
+			else if(this.text_line_6.text.length <= 75) {
+				this.text_line_6.setText(comments.slice(375));
+			}
+			else if(this.text_line_7.text.length <= 75) {
+				this.text_line_7.setText(comments.slice(450));
+			}
 		}
 		if(comments == "") {
-			this.text.setText('Enter Your Comments');
+			this.text_line_1.setText("Enter Your Comments");
 		}
 	}
-
 	/* END-USER-CODE */
 }
 
